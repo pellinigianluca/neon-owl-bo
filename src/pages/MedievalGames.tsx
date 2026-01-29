@@ -1,71 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import TimelineGame from "@/components/TimelineGame";
 import CharacterMatchGame from "@/components/CharacterMatchGame";
-import MedievalMemoryGame from "@/components/MedievalMemoryGame";
-
-// Shuffle array function (Fisher-Yates)
-const shuffleArray = <T extends any[]>(array: T): T => {
-  const newArray = [...array] as T;
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-};
-
-const gameOptions = [
-  {
-    id: "memory",
-    title: "Memory Game Medievale",
-    description: "Metti alla prova la tua memoria! Abbina le coppie di carte con temi medievali e scopri quanto sei bravo a ricordare.",
-    buttonText: "Gioca Ora",
-    bgColor: "from-purple-100 to-pink-100",
-    buttonColor: "bg-purple-500 hover:bg-purple-600",
-    titleColor: "text-purple-800",
-    descriptionColor: "text-purple-600",
-  },
-  {
-    id: "timeline",
-    title: "Linea del Tempo Reale",
-    description: "Ordina gli eventi storici! Trascina e rilascia gli eventi nella loro corretta sequenza cronologica.",
-    buttonText: "Gioca Ora",
-    bgColor: "from-green-100 to-teal-100",
-    buttonColor: "bg-teal-500 hover:bg-teal-600",
-    titleColor: "text-teal-800",
-    descriptionColor: "text-teal-600",
-  },
-  {
-    id: "character-match",
-    title: "Abbina il Personaggio",
-    description: "Chi è chi nel Medioevo? Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.",
-    buttonText: "Gioca Ora",
-    bgColor: "from-blue-100 to-indigo-100",
-    buttonColor: "bg-indigo-500 hover:bg-indigo-600",
-    titleColor: "text-indigo-800",
-    descriptionColor: "text-indigo-600",
-  },
-];
+import MedievalMemoryGame from "@/components/MedievalMemoryGame"; // Import the new MedievalMemoryGame component
 
 const MedievalGames = () => {
-  const [activeGame, setActiveGame] = useState<string | null>(null);
-  const [shuffledGameOptions, setShuffledGameOptions] = useState(() => shuffleArray(gameOptions));
-
-  // Re-shuffle game options when returning to the main game selection
-  useEffect(() => {
-    if (activeGame === null) {
-      setShuffledGameOptions(shuffleArray(gameOptions));
-    }
-  }, [activeGame]);
+  const [activeGame, setActiveGame] = useState<string | null>(null); // State to manage which game is active
 
   const renderGame = () => {
     switch (activeGame) {
-      case "memory":
+      case "memory": // New case for Memory Game
         return <MedievalMemoryGame />;
       case "timeline":
         return <TimelineGame />;
@@ -74,22 +23,53 @@ const MedievalGames = () => {
       default:
         return (
           <>
-            {shuffledGameOptions.map((game) => (
-              <Card key={game.id} className={cn("bg-gradient-to-br rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300", game.bgColor)}>
-                <CardHeader>
-                  <CardTitle className={cn("text-2xl font-bold", game.titleColor)}>{game.title}</CardTitle>
-                  <CardDescription className={cn(game.descriptionColor)}>{game.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button
-                    onClick={() => setActiveGame(game.id)}
-                    className={cn("w-full text-white font-semibold rounded-lg py-2 transition-colors duration-300", game.buttonColor)}
-                  >
-                    {game.buttonText}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+            <Card className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-purple-800">Memory Game Medievale</CardTitle>
+                <CardDescription className="text-purple-600">Metti alla prova la tua memoria!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Abbina le coppie di carte con temi medievali e scopri quanto sei bravo a ricordare.</p>
+                <Button
+                  onClick={() => setActiveGame("memory")}
+                  className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-100 to-teal-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-teal-800">Linea del Tempo Reale</CardTitle>
+                <CardDescription className="text-teal-600">Ordina gli eventi storici!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Trascina e rilascia gli eventi nella loro corretta sequenza cronologica.</p>
+                <Button
+                  onClick={() => setActiveGame("timeline")}
+                  className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-indigo-800">Abbina il Personaggio</CardTitle>
+                <CardDescription className="text-indigo-600">Chi è chi nel Medioevo?</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.</p>
+                <Button
+                  onClick={() => setActiveGame("character-match")}
+                  className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
           </>
         );
     }
@@ -114,9 +94,9 @@ const MedievalGames = () => {
           Benvenuto nella nostra sezione di giochi divertenti per esplorare la storia affascinante del Medioevo! Scegli un gioco e inizia a imparare.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        <div className="grid grid-cols-1 md:col-span-2 lg:col-span-3 gap-6 justify-items-center">
           {activeGame && (
-            <div className="w-full flex justify-center mb-6 md:col-span-2 lg:col-span-3">
+            <div className="w-full flex justify-center mb-6">
               <Button
                 onClick={() => setActiveGame(null)}
                 className="bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg py-2 px-6 transition-colors duration-300 shadow-md"
