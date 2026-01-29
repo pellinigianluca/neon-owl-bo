@@ -8,7 +8,6 @@ import { ArrowLeft } from "lucide-react";
 import TimelineGame from "@/components/TimelineGame";
 import CharacterMatchGame from "@/components/CharacterMatchGame";
 import MedievalMemoryGame from "@/components/MedievalMemoryGame";
-import { cn } from "@/lib/utils"; // Importazione corretta della funzione cn
 
 // Shuffle array function (Fisher-Yates)
 const shuffleArray = <T extends any[]>(array: T): T => {
@@ -57,6 +56,7 @@ const MedievalGames = () => {
   const [activeGame, setActiveGame] = useState<string | null>(null);
   const [shuffledGameOptions, setShuffledGameOptions] = useState(() => shuffleArray(gameOptions));
 
+  // Re-shuffle game options when returning to the main game selection
   useEffect(() => {
     if (activeGame === null) {
       setShuffledGameOptions(shuffleArray(gameOptions));
