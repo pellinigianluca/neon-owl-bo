@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import KnightQuiz from "@/components/KnightQuiz";
-import TimelineGame from "@/components/TimelineGame"; // Import the new TimelineGame component
+import TimelineGame from "@/components/TimelineGame";
+import CharacterMatchGame from "@/components/CharacterMatchGame"; // Import the new CharacterMatchGame component
 
 const MedievalGames = () => {
   const [activeGame, setActiveGame] = useState<string | null>(null); // State to manage which game is active
@@ -17,6 +18,8 @@ const MedievalGames = () => {
         return <KnightQuiz />;
       case "timeline":
         return <TimelineGame />;
+      case "character-match": // New case for Character Match Game
+        return <CharacterMatchGame />;
       default:
         return (
           <>
@@ -59,7 +62,10 @@ const MedievalGames = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 mb-4">Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.</p>
-                <Button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300">
+                <Button
+                  onClick={() => setActiveGame("character-match")} // Set active game to character-match
+                  className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
                   Gioca Ora
                 </Button>
               </CardContent>
