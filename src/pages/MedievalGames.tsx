@@ -8,7 +8,7 @@ import { ArrowLeft } from "lucide-react";
 import TimelineGame from "@/components/TimelineGame";
 import CharacterMatchGame from "@/components/CharacterMatchGame";
 import MedievalMemoryGame from "@/components/MedievalMemoryGame";
-import { cn } from "@/lib/utils"; // Importazione corretta della funzione cn
+import { cn } from "@/lib/utils";
 
 // Shuffle array function (Fisher-Yates)
 const shuffleArray = <T extends any[]>(array: T): T => {
@@ -97,7 +97,7 @@ const MedievalGames = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 p-6 flex flex-col items-center justify-center">
-      <div className="w-full max-w-4xl bg-white rounded-xl shadow-2xl p-8 space-y-8">
+      <div className="container mx-auto max-w-5xl bg-white rounded-xl shadow-2xl p-8 space-y-8">
         <div className="flex items-center justify-between mb-6">
           <Button asChild variant="outline" className="rounded-full px-4 py-2 text-purple-700 border-purple-300 hover:bg-purple-100 transition-all duration-300">
             <Link to="/" className="flex items-center">
