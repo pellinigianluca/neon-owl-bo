@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { CheckCircle2, XCircle } from "lucide-react";
@@ -29,6 +29,26 @@ const quizQuestions: Question[] = [
     question: "Quale evento segna convenzionalmente l'inizio del Medioevo?",
     options: ["La scoperta dell'America", "La caduta dell'Impero Romano d'Occidente", "La Rivoluzione Francese", "La nascita di Cristo"],
     correctAnswer: "La caduta dell'Impero Romano d'Occidente",
+  },
+  {
+    question: "Qual era il sistema sociale dominante nel Medioevo?",
+    options: ["Democrazia", "Comunismo", "Feudalesimo", "Capitalismo"],
+    correctAnswer: "Feudalesimo",
+  },
+  {
+    question: "Quale fu una delle principali cause della fine del Medioevo?",
+    options: ["L'invenzione del telefono", "La scoperta dell'elettricità", "La Peste Nera", "L'invenzione della stampa"],
+    correctAnswer: "La Peste Nera",
+  },
+  {
+    question: "Chi erano i cavalieri?",
+    options: ["Contadini", "Mercanti", "Guerrieri a cavallo", "Artigiani"],
+    correctAnswer: "Guerrieri a cavallo",
+  },
+  {
+    question: "Quale fu il ruolo della Chiesa nel Medioevo?",
+    options: ["Solo spirituale", "Solo politico", "Spirituale e politico", "Nessun ruolo"],
+    correctAnswer: "Spirituale e politico",
   },
 ];
 
