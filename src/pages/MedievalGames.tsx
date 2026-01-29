@@ -5,34 +5,34 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import KnightQuiz from "@/components/KnightQuiz";
 import TimelineGame from "@/components/TimelineGame";
-import CharacterMatchGame from "@/components/CharacterMatchGame"; // Import the new CharacterMatchGame component
+import CharacterMatchGame from "@/components/CharacterMatchGame";
+import MedievalMemoryGame from "@/components/MedievalMemoryGame"; // Import the new MedievalMemoryGame component
 
 const MedievalGames = () => {
   const [activeGame, setActiveGame] = useState<string | null>(null); // State to manage which game is active
 
   const renderGame = () => {
     switch (activeGame) {
-      case "quiz":
-        return <KnightQuiz />;
+      case "memory": // New case for Memory Game
+        return <MedievalMemoryGame />;
       case "timeline":
         return <TimelineGame />;
-      case "character-match": // New case for Character Match Game
+      case "character-match":
         return <CharacterMatchGame />;
       default:
         return (
           <>
-            <Card className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-orange-800">Quiz del Cavaliere</CardTitle>
-                <CardDescription className="text-orange-600">Metti alla prova le tue conoscenze!</CardDescription>
+                <CardTitle className="text-2xl font-bold text-purple-800">Memory Game Medievale</CardTitle>
+                <CardDescription className="text-purple-600">Metti alla prova la tua memoria!</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-4">Rispondi a domande sulla vita dei cavalieri, i castelli e gli eventi chiave del Medioevo.</p>
+                <p className="text-gray-700 mb-4">Abbina le coppie di carte con temi medievali e scopri quanto sei bravo a ricordare.</p>
                 <Button
-                  onClick={() => setActiveGame("quiz")}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                  onClick={() => setActiveGame("memory")}
+                  className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
                 >
                   Gioca Ora
                 </Button>
@@ -63,7 +63,7 @@ const MedievalGames = () => {
               <CardContent>
                 <p className="text-gray-700 mb-4">Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.</p>
                 <Button
-                  onClick={() => setActiveGame("character-match")} // Set active game to character-match
+                  onClick={() => setActiveGame("character-match")}
                   className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
                 >
                   Gioca Ora
