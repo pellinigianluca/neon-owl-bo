@@ -8,6 +8,7 @@ import { ArrowLeft } from "lucide-react";
 import TimelineGame from "@/components/TimelineGame";
 import CharacterMatchGame from "@/components/CharacterMatchGame";
 import MedievalMemoryGame from "@/components/MedievalMemoryGame";
+import { cn } from "@/lib/utils"; // Import the cn utility function
 
 // Shuffle array function (Fisher-Yates)
 const shuffleArray = <T extends any[]>(array: T): T => {
