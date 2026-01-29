@@ -5,10 +5,69 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import KnightQuiz from "@/components/KnightQuiz"; // Import the new KnightQuiz component
+import KnightQuiz from "@/components/KnightQuiz";
+import TimelineGame from "@/components/TimelineGame"; // Import the new TimelineGame component
 
 const MedievalGames = () => {
-  const [showQuiz, setShowQuiz] = useState(false);
+  const [activeGame, setActiveGame] = useState<string | null>(null); // State to manage which game is active
+
+  const renderGame = () => {
+    switch (activeGame) {
+      case "quiz":
+        return <KnightQuiz />;
+      case "timeline":
+        return <TimelineGame />;
+      default:
+        return (
+          <>
+            <Card className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-orange-800">Quiz del Cavaliere</CardTitle>
+                <CardDescription className="text-orange-600">Metti alla prova le tue conoscenze!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Rispondi a domande sulla vita dei cavalieri, i castelli e gli eventi chiave del Medioevo.</p>
+                <Button
+                  onClick={() => setActiveGame("quiz")}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-100 to-teal-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-teal-800">Linea del Tempo Reale</CardTitle>
+                <CardDescription className="text-teal-600">Ordina gli eventi storici!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Trascina e rilascia gli eventi nella loro corretta sequenza cronologica.</p>
+                <Button
+                  onClick={() => setActiveGame("timeline")}
+                  className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
+                >
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-indigo-800">Abbina il Personaggio</CardTitle>
+                <CardDescription className="text-indigo-600">Chi è chi nel Medioevo?</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.</p>
+                <Button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300">
+                  Gioca Ora
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 p-6 flex flex-col items-center justify-center">
@@ -29,56 +88,18 @@ const MedievalGames = () => {
           Benvenuto nella nostra sezione di giochi divertenti per esplorare la storia affascinante del Medioevo! Scegli un gioco e inizia a imparare.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {showQuiz ? (
-            <div className="md:col-span-2 lg:col-span-3 flex justify-center">
-              <KnightQuiz />
+        <div className="grid grid-cols-1 md:col-span-2 lg:col-span-3 gap-6 justify-items-center">
+          {activeGame && (
+            <div className="w-full flex justify-center mb-6">
+              <Button
+                onClick={() => setActiveGame(null)}
+                className="bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg py-2 px-6 transition-colors duration-300 shadow-md"
+              >
+                Torna ai Giochi
+              </Button>
             </div>
-          ) : (
-            <>
-              <Card className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-orange-800">Quiz del Cavaliere</CardTitle>
-                  <CardDescription className="text-orange-600">Metti alla prova le tue conoscenze!</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 mb-4">Rispondi a domande sulla vita dei cavalieri, i castelli e gli eventi chiave del Medioevo.</p>
-                  <Button
-                    onClick={() => setShowQuiz(true)}
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300"
-                  >
-                    Gioca Ora
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-green-100 to-teal-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-teal-800">Linea del Tempo Reale</CardTitle>
-                  <CardDescription className="text-teal-600">Ordina gli eventi storici!</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 mb-4">Trascina e rilascia gli eventi nella loro corretta sequenza cronologica.</p>
-                  <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300">
-                    Gioca Ora
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-indigo-800">Abbina il Personaggio</CardTitle>
-                  <CardDescription className="text-indigo-600">Chi è chi nel Medioevo?</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 mb-4">Abbina i nomi dei personaggi medievali alle loro descrizioni o immagini.</p>
-                  <Button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg py-2 transition-colors duration-300">
-                    Gioca Ora
-                  </Button>
-                </CardContent>
-              </Card>
-            </>
           )}
+          {renderGame()}
         </div>
       </div>
     </div>
